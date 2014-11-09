@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+    <title>Example 01.02 - First Scene</title>
+    <script type="text/javascript" src="../libs/three.js"></script>
+    <script type="text/javascript" src="../libs/jquery-1.9.0.js"></script>
+    <style>
+        body{
+            /* set margin to 0 and overflow to hidden, to go fullscreen */
+            margin: 0;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+
+<!-- Div which will hold the Output -->
+<div id="WebGL-output">
+</div>
+
+<!-- Javascript code that runs our Three.js examples -->
+<script type="text/javascript">
+var scene = new THREE.Scene();
+var camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 0.1, 10000);
+//var camera = new THREE.PerspectiveCamera(45, 1, 0.1, 1000);
+
+// create a render and set the size
+var renderer = new THREE.WebGLRenderer();
+
+    // once everything is loaded, we run our Three.js stuff.
+    $(function () {
+	var pin = [
+    {"name":"New York", "lat":"40.714353", "lng":"-74.005973"},
+    {"name":"San Francisco", "lat":"37.77493", "lng":"-122.419416"},
+    {"name":"Seattle", "lat":"47.60621", "lng":"-122.332071"},
+    {"name":"Los Angeles", "lat":"34.052234", "lng":"-118.243685"},
+    {"name":"Denver", "lat":"39.737567", "lng":"-104.984718"},
+    {"name":"Chicago", "lat":"41.878114", "lng":"-87.629798"},
+    {"name":"Austin", "lat":"30.267153", "lng":"-97.743061"},
+    {"name":"Miami", "lat":"25.788969", "lng":"-80.226439"},
+    {"name":"Pittsburg", "lat":"40.440625", "lng":"-79.995886"},
+    {"name":"Phoenix", "lat":"33.448377", "lng":"-112.074037"},
+    {"name":"Atlanta", "lat":"33.748995", "lng":"-84.387982"},
+    {"name":"Kansas City", "lat":"39.099727", "lng":"-94.578567"}
+	];
+var myLat = 0, myLng = 0;
+
+	// Start watching the geolocation
+function startGeolocation(){
+    var options = { timeout: 30000 };
+    watchGeoID = navigator.geolocation.watchPosition(onGeoSuccess, onGeoError, options);
+}
+        
+// Stop watching the geolocation
+function stopGeolocation() {
+    if (watchGeoID) {
+        navigator.geolocation.clearWatch(watchGeoID);
+        watchGeoID = null;
+    }
+}
+        
+// onSuccess: Get the current location
+function onGeoSuccess(position) {
+	window.alert("onGeoSuccess"+position);
+//    document.getElementById('geolocation').innerHTML = 'Latitude: ' + position.coords.latitude + '<br />' + 'Longitude: ' + position.coords.longitude;
+    myLat = position.coords.latitude;
+    myLng = position.coords.longitude;
+    for(var i=0; i< pin.length; i++){
+        relativePosition(i);
+    }
+    renderer.render(scene, camera);
+
+}
+
+// onError: Failed to get the location
+function onGeoError(msg) {
+//    document.getElementById('log').innerHTML += "onError=.";
+window.alert("errorrr"+msg.message);
+}
+
+function relativePosition(i){
+    var pinLat = pin[i].lat;
+    var pinLng = pin[i].lng;
+    var dLat = (myLat-pinLat)* Math.PI / 180;
+    var dLon = (myLng-pinLng)* Math.PI / 180;
+    var lat1 = pinLat * Math.PI / 180;
+    var lat2 = myLat * Math.PI / 180;
+    var y = Math.sin(dLon) * Math.cos(lat2);
+    var x = Math.cos(lat1)*Math.sin(lat2) - Math.sin(lat1)*Math.cos(lat2)*Math.cos(dLon);
+    bearing = Math.atan2(y, x) * 180 / Math.PI;
+    bearing = bearing + 180;
+    pin[i]['bearing'] = bearing;
+
+    var a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    var c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    var distance = 3958.76 * c;
+    pin[i]['distance'] = distance;
+	
+	dLat=0;
+    a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    distance = 3958.76 * c;
+    pin[i]['distancex'] = distance;
+
+    dLat = (myLat-pinLat)* Math.PI / 180;
+	dLon=0;
+    a = Math.sin(dLat/2) * Math.sin(dLat/2) + Math.sin(dLon/2) * Math.sin(dLon/2) * Math.cos(lat1) * Math.cos(lat2);
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1-a));
+    distance = 3958.76 * c;
+    pin[i]['distancez'] = distance;
+    if (i==0){
+		window.alert("distancex "+pin[i]['distancex']+" distancez "+pin[i]['distancez']);
+    }
+    var sphereGeometryTmp = new THREE.SphereGeometry(4,20,20);
+    var sphereMaterialTmp = new THREE.MeshBasicMaterial({color: 0x7777ff, wireframe: true});
+    var sphereTmp = new THREE.Mesh(sphereGeometryTmp,sphereMaterialTmp);
+
+    // position the sphere
+/*    sphereTmp.position.x=0+(i*20);
+    sphereTmp.position.y=0;
+    sphereTmp.position.z=-500;*/
+    sphereTmp.position.x=pin[i]['distancex'];
+    sphereTmp.position.y=0;
+    sphereTmp.position.z=-pin[i]['distancey'];
+
+
+    // add the sphere to the scene
+    scene.add(sphereTmp);
+    
+}
+
+
+
+startGeolocation();
+
+        // create a scene, that will hold all our elements such as objects, cameras and lights.
+
+        // create a camera, which defines where we're looking at.
+
+        renderer.setClearColorHex(0xEEEEEE);
+//		window.alert("width "+window.innerWidth+" height "+window.innerHeight);
+        renderer.setSize(window.innerWidth, window.innerHeight);
+//        renderer.setSize(50,50);
+
+/*        var axes = new THREE.AxisHelper( 20 );
+        scene.add(axes);*/
+
+        // create the ground plane
+        var planeGeometry = new THREE.PlaneGeometry(60,20);
+        var planeMaterial = new THREE.MeshBasicMaterial({color: 0xcccccc});
+        var plane = new THREE.Mesh(planeGeometry,planeMaterial);
+
+
+        // rotate and position the plane
+//        plane.rotation.x=-0.5*Math.PI;
+        plane.position.x=15
+        plane.position.y=0
+        plane.position.z=-200
+
+        // add the plane to the scene
+//        scene.add(plane);
+
+        // create a cube
+        var cubeGeometry = new THREE.CubeGeometry(4,4,4);
+        var cubeMaterial = new THREE.MeshBasicMaterial({color: 0xff0000, wireframe: true});
+        var cube = new THREE.Mesh(cubeGeometry, cubeMaterial);
+
+
+        // position the cube
+        cube.position.x=-20;
+        cube.position.y=3;
+        cube.position.z=-200;
+
+        // add the cube to the scene
+        scene.add(cube);
+
+        var sphereGeometry = new THREE.SphereGeometry(4,20,20);
+        var sphereMaterial = new THREE.MeshBasicMaterial({color: 0x7777ff, wireframe: true});
+        var sphere = new THREE.Mesh(sphereGeometry,sphereMaterial);
+
+        // position the sphere
+        sphere.position.x=0;
+        sphere.position.y=0;
+        sphere.position.z=-1000;
+
+
+        // add the sphere to the scene
+//        scene.add(sphere);
+
+        // position and point the camera to the center of the scene
+//        camera.rotation.z=Math.PI;
+        camera.position.x = 0;
+        camera.position.y = 0;
+        camera.position.z = 0;
+        camera.lookAt(scene.position);
+
+        // add the output of the renderer to the html element
+        $("#WebGL-output").append(renderer.domElement);
+
+        // render the scene
+        renderer.render(scene, camera);
+    });
+
+
+
+</script>
+</body>
+</html>

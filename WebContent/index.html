@@ -1,0 +1,59 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>PFC</title>
+<link rel="stylesheet" href="css/styles.css" />
+
+<!-- <script src="js/jquery-1.9.1.min.js"></script>-->
+ <script src="js/jquery-1.7.1.min.js"></script>
+<script src="js/main.js"></script>
+
+</head>
+
+<body>
+
+<div class="header">
+	<input type="text" id="searchKey"/>
+	<button id="btnSearch">Buscar</button>
+	<button id="btnAdd">Nuevo POI</button>
+</div>
+
+
+<div class="leftArea">
+<ul id="poiList"></ul>
+</div>
+
+<form id="poiForm">
+	
+<div class="mainArea">
+
+<label>Id:</label>
+<input id="poiId" name="id" type="text" disabled />
+
+<label>Titulo:</label>
+<input type="text" id="titulo" name="titulo" required>
+
+<label>Tipo:</label>
+<input type="text" id="tipo" name="tipo"/>
+
+<label>Latitud:</label>
+<input type="text" id="latitud" name="latitud"/>
+
+<label>Longitud:</label>
+<input type="text" id="longitud" name="longitud"/>
+
+<button id="btnSave">Guardar</button>
+<button id="btnDelete">Eliminar</button>
+
+</div>
+
+<div class="rightArea">
+
+<label>Descripci&oacute;n:</label>
+<textarea id="descripcion" name="descripcion"></textarea>
+</div>
+
+</form>
+
+</body>
+</html>

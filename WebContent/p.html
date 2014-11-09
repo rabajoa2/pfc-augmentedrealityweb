@@ -1,0 +1,106 @@
+
+
+<div data-role="page" class="jqm-pfc" id="mainPagePage">
+	<div data-role="header" class="jqm-header" id="mainPageHeader"
+		data-theme="a">
+		<div style="margin-top: 5px; border: none;">
+			<fieldset class="ui-grid-a">
+				<div class="ui-block-a">
+					<div id="navMenuLeft" class="jqm-navmenu-left"></div>
+				</div>
+				<div class="ui-block-b">
+					<div id="navMenuRight" class="jqm-navmenu-right"></div>
+				</div>
+			</fieldset>
+		</div>
+	</div>
+	<!-- /header -->
+	<div data-role="content" id="mainPageContent" class="jqm-content">
+		<div id="wrapper-content" class="jqm-wrapper-content">
+			<div id="centralContent">
+				<a href="gestion.html" data-role="button" data-icon="gear" data-theme="b">Listado</a> 
+				<a href="navegar.html" data-role="button" data-icon="gear" data-theme="b">Navegar</a> 
+				<a href="capas.html" data-role="button" data-icon="gear" data-theme="b">Capas</a>
+			</div>
+		</div>
+	</div>
+	<!-- /content -->
+
+	<div data-role="panel" id="mainPagePanel"
+		class="jqm-panel jqm-nav-panel jqm-navmenu-panel" data-position="left"
+		data-display="reveal" data-theme="c">
+		<ul data-role="listview" data-theme="d" data-divider-theme="d"
+			data-icon="false" data-global-nav="demos" class="jqm-list">
+			<li data-role="list-divider" data-theme="d">Configuraci&oacute;n</li>
+			<li data-section="Configuracion" data-filtertext="Listado"><a
+				href="gestion.html" data-ajax="false">Listado</a></li>
+			<li data-section="Configuracion" data-filtertext="Navegar"><a
+				href="navegar.html" data-ajax="false">Navegar</a></li>
+			<li data-section="Configuracion" data-filtertext="Favoritas"><a
+				href="principal.html" data-ajax="false">Principal</a></li>
+			<li data-role="list-divider" data-theme="d"></li>
+			<li data-section="Perfil" data-filtertext="Editar Perfil"><a
+				href="capas.html" data-ajax="false">Capas</a></li>
+			<li data-section="Perfil" data-filtertext="Cerrar Sesi&oacute;n">
+				<a href="principal.html" id="mainCerrarSesion" data-ajax="false">Cerrar
+					Sesi&oacute;n</a>
+			</li>
+		</ul>
+	</div>
+	<!-- /panel -->
+</div>
+<!-- /page -->
+
+
+
+
+<script src="js/gestion.js"></script>
+<div id="centralContent">
+	<div class="header">
+		<ul data-role="listview" data-inset="true" data-theme="b">
+			<li data-role="fieldcontain"><label>Busqueda:</label> <input
+				type="text" id="searchKey" /></li>
+		</ul>
+		<button id="btnSearch" data-theme="b">Buscar</button>
+		<button id="btnAdd" data-theme="b">Nuevo POI</button>
+	</div>
+
+	<div class="leftArea">
+		<ul id="poiList"></ul>
+	</div>
+
+	<form id="poiForm">
+
+		<div class="mainArea">
+
+			<ul data-role="listview" data-inset="true" data-theme="b">
+				<li data-role="fieldcontain"><label>Id:</label> <input
+					id="poiId" name="id" type="text" disabled /></li>
+				<li data-role="fieldcontain"><label>Titulo:</label> <input
+					type="text" id="titulo" name="titulo" required></li>
+				<li data-role="fieldcontain"><label>Tipo:</label> <input
+					type="text" id="tipo" name="tipo" /></li>
+				<li data-role="fieldcontain"><label>Latitud:</label> <input
+					type="text" id="latitud" name="latitud" /></li>
+				<li data-role="fieldcontain"><label>Longitud:</label> <input
+					type="text" id="longitud" name="longitud" /></li>
+				<li data-role="fieldcontain"><label>Descripci&oacute;n:</label>
+					<textarea id="descripcion" name="descripcion"></textarea></li>
+			</ul>
+
+
+
+
+
+
+		</div>
+		<div class="rightArea">
+			<button id="btnSave" data-theme="b">Guardar</button>
+			<button id="btnDelete" data-theme="b">Eliminar</button>
+
+
+		</div>
+
+
+	</form>
+</div>

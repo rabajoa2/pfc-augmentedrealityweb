@@ -1,0 +1,73 @@
+<link rel="stylesheet" href="css/themes/default/jquery.mobile.theme-1.3.2.css" />
+<link rel="stylesheet" href="css/styles_gestion.css" />
+<script src="js/gestion.js"></script>
+<div id="centralContent">
+<div class="header">
+ <ul data-role="listview" data-inset="true" data-theme="b">
+		        <li data-role="fieldcontain">
+					<label>Busqueda:</label>
+					<input type="text" id="searchKey"/>
+		        </li>
+</ul>
+	<button id="btnSearch" data-theme="b" >Buscar</button>
+	<button id="btnAdd" data-theme="b" >Nuevo POI</button>
+</div>
+
+<div class="leftArea">
+<ul id="poiList"></ul>
+</div>
+
+<form id="poiForm">
+	
+<div class="mainArea">
+
+ <ul data-role="listview" data-inset="true" data-theme="b">
+		        <li data-role="fieldcontain">
+					<label>Id:</label>
+					<input id="poiId" name="id" type="text" disabled />
+		        </li>
+		        <li data-role="fieldcontain">
+					<label>Titulo:</label>
+					<input type="text" id="titulo" name="titulo" required>
+		        </li>
+		        <li data-role="fieldcontain">
+					<label>Tipo:</label>
+<!-- 					<input type="text" id="tipo" name="tipo"/>-->
+					<select name="tipo" id="tipo" >
+					<option value="1">Universidades</option>
+					<option value="2">Monumentos</option>
+					<option value="3">Restaurantes</option>
+					<option value="4">Gimnasios</option>
+					<option value="5">Bares</option>
+					</select>
+		        </li>
+		        <li data-role="fieldcontain">
+					<label>Latitud:</label>
+					<input type="text" id="latitud" name="latitud"/>
+		        </li>
+		        <li data-role="fieldcontain">
+					<label>Longitud:</label>
+					<input type="text" id="longitud" name="longitud"/>
+		        </li>
+		        <li data-role="fieldcontain">
+					<label>Descripci&oacute;n:</label>
+					<textarea id="descripcion" name="descripcion"></textarea>
+		        </li>
+		    </ul>
+
+
+
+
+
+
+</div>
+<div class="rightArea">
+<button id="btnSave" data-theme="b" >Guardar</button>
+<button id="btnDelete" data-theme="b" >Eliminar</button>
+
+
+</div>
+
+
+</form>
+</div>

@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta name="viewport" content="width=device-width, minimum-scale=1.0, maximum-scale=1.0" />
+	<title>PFC</title>
+<style type="text/css">
+* {
+	margin: 0;
+	padding: 0;
+}
+#container {
+	position: absolute;
+	left: 0;
+	top: 0;
+	bottom: 0;
+	right: 0;
+	overflow: hidden;
+}
+</style>
+	<link rel="shortcut icon" href="img/favicon.ico">
+	<link rel="stylesheet" href="css/themes/default/jquery.mobile.structure-1.3.2.css" />
+<!-- 	<link rel="stylesheet" href="css/themes/default/jquery.mobile.theme-1.3.2.css" />-->
+	<link rel="stylesheet" href="css/jqm_pfc.css" />
+	<script src="js/jquery-1.9.1.min.js"></script>
+	<script src="js/initconfig.js"></script>
+	<script src="js/jquery.mobile-1.3.2.min.js"></script>
+    <script type="text/javascript" src="js/jquery.amutilplugin.js"></script>
+	<script type="text/javascript" src="js/awe.js"></script>
+	<script src="js/indexHome.js"></script>
+</head>
+<body>
+			<div id="container"></div>
+
+	<div data-role="page" class="jqm-pfc" id="mainPagePage">
+		<div data-role="header" class="jqm-header" id="mainPageHeader" data-theme="a">
+				<div style="margin-top: 5px; border: none;">
+		            <fieldset class="ui-grid-a">
+		                    <div class="ui-block-a">
+								<div id="navMenuLeft" class="jqm-navmenu-left">
+				 				</div>
+		                    </div>
+		                    <div class="ui-block-b">
+				 				<div id="navMenuRight" class="jqm-navmenu-right">
+				 				</div>
+			 				</div>
+		            </fieldset>
+		        </div>
+		</div>
+		<!-- /header -->
+		<div data-role="panel" id="mainPagePanel" class="jqm-panel jqm-nav-panel jqm-navmenu-panel" data-position="left" data-display="reveal" data-theme="c">
+			<ul data-role="listview" data-theme="d" data-divider-theme="d" data-icon="false" data-global-nav="demos" class="jqm-list">
+	            <li data-role="list-divider" data-theme="d">Configuraci&oaucte;n</li>
+				<li data-section="Configuracion" data-filtertext="Listado">
+					<a href="listado.html" data-ajax="false">Listado</a>
+				</li>
+				<li data-section="Configuracion" data-filtertext="Crear">
+					<a href="anadir.html" data-ajax="false">A&ntilde;adir</a>
+				</li>
+				<li data-section="Configuracion" data-filtertext="Favoritas">
+					<a href="favoritos" data-ajax="false">Favoritos</a>
+				</li>
+	            <li data-role="list-divider" data-theme="d"></li>
+				<li data-section="Perfil" data-filtertext="Editar Perfil">
+					<a href="perfil.html" data-ajax="false">Mi Perfil</a>
+				</li>
+				<li data-section="Perfil" data-filtertext="Cerrar Sesi&oacute;n">
+					<a href="cerrar.html" id="mainCerrarSesion" data-ajax="false">Cerrar Sesi&oacute;n</a>
+				</li>
+			</ul>
+		</div>
+		<!-- /panel -->
+	</div>
+	<!-- /page -->
+
+</body>
+</html>
